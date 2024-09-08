@@ -1,0 +1,200 @@
+### Variable 
+@BASEURI = http://localhost:3000/api/v1/
+
+### User registration
+POST  {{BASEURI}}/users/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstname": "Srishti",
+  "lastname": "Kumari",
+  "email": "srishti@gmail.com",
+  "mobile": "789789",
+  "password": "1234",
+  "confirmpassword": "1234",
+  "address": {
+    "street1": "Patna",
+    "street2": "Exbhition road",
+    "landmark": "Rajendra Path",
+    "city": "Patna",
+    "state": "Bihar",
+    "pincode": "800003",
+    "country": "India"
+  }
+}
+
+### User login
+POST  {{BASEURI}}/users/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"srishti@gmail.com",
+    "password":"1234"
+}
+
+### Reset password request
+POST {{BASEURI}}/users/auth/resetPassword HTTP/1.1
+Content-Type: application/json
+
+{
+    "token":"",
+    "password":""
+}
+
+### User logout 
+GET {{BASEURI}}/users/auth/logout HTTP/1.1
+
+### Create a category
+POST {{BASEURI}}/store/categories HTTP/1.1
+Content-Type: application/json
+
+{
+  "name":"The name jar",
+  "description":"A book is a medium for recording information in the form of writing or images."
+}
+
+### Read all categories
+GET {{BASEURI}}/store/categories HTTP/1.1
+
+### Read a category
+GET {{BASEURI}}/store/categories/66c4a9dcd2746831f22ba772 
+
+### Update a category
+PUT {{BASEURI}}/store/categories/66c4a9dcd2746831f22ba772 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name":"The magic jar",
+  "description":"We know you hate chemically corrupted products and so do we…. Magical jar is committed to creating 100% chemical-free, Natural products at an affordable price."
+}
+
+### Delete a category
+DELETE {{BASEURI}}/store/categories/66c5eacbc1b30255830413ff 
+
+### Create a product
+POST {{BASEURI}}/store/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "title":"Bottle 2",
+  "description":"This is made of plastic and have yellow colour.",
+  "brand":"Milton",
+  "price": 900,
+  "images":[
+    "https://i.pinimg.com/736x/ec/5f/2a/ec5f2a03ec7cee649608556314fc0530.jpg"
+  ],
+  "stock": 2,
+  "category":"66c4a9dcd2746831f22ba772"
+}
+
+### Read all products
+GET {{BASEURI}}/store/products HTTP/1.1
+
+### Read a product
+GET {{BASEURI}}/store/products/66c5f5f4eff4b4d63d7673c6
+
+### Delete a product
+DELETE {{BASEURI}}/store/products/66c5f635eff4b4d63d7673c9
+
+### Update a product
+PUT {{BASEURI}}/store/products/66c5fb33eff4b4d63d7673e3 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title":"Tiffin ",
+  "description":"This is made of plastic and have yellow colour.",
+  "brand":"Milton",
+  "price": 500,
+  "images":["https://rukminim2.flixcart.com/image/850/1000/knknc7k0/lunch-box/4/k/j/exclusive-tifin-lunch-box-soft-insulated-tiffin-box-2-ss-original-imag2847hcdbyhyy.jpeg?q=90&crop=false"],
+  "stock": 5,
+  "category":"66c4a9dcd2746831f22ba772"
+}
+
+### Create a order
+POST {{BASEURI}}/store/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  
+  "items":[
+    {
+      "product": "66c5fb33eff4b4d63d7673e3",
+      "quantity":4
+    },
+    {
+      "product":"66c5f7a6eff4b4d63d7673d5",
+      "quantity":8
+    }
+  ],
+
+  "paymentDetails":{
+    "paymentMethod":"Google pay",
+    "cardNumber":"4512"
+  },
+
+  "shippingAddress":{
+    "name":"Rina",
+    "street1":"Patna",
+    "landmark":"Boring road"
+  }
+}
+
+### Read all order
+GET {{BASEURI}}/store/orders HTTP/1.1
+Content-Type: application/json
+
+### Cancel a order
+PATCH {{BASEURI}}/store/orders/66c600a8036e6dcaaa085768 HTTP/1.1
+content-type: application-json
+
+### Reading cart
+GET {{BASEURI}}/store/carts HTTP/1.1
+
+### Create a item in a cart
+POST {{BASEURI}}/store/carts HTTP/1.1
+Content-Type: application/json
+
+{
+  "item":
+    {
+      "product":"66c5fb33eff4b4d63d7673e3",
+      "quantity":4
+    }
+  
+}
+
+### Remove an items from cart
+PATCH {{BASEURI}}/store/carts/66c5fb33eff4b4d63d7673e3 HTTP/1.1
+
+### Reading an item from cart
+GET {{BASEURI}}/store/carts/66c5fb33eff4b4d63d7673e3
+
+### Empty cart
+PUT {{BASEURI}}/store/carts HTTP/1.1
+
+### Read wishlist
+GET {{BASEURI}}/store/wishlists HTTP/1.1
+
+### Adding an item to wishlist
+POST {{BASEURI}}/store/wishlists HTTP/1.1
+Content-Type: application/json
+
+{
+  "items":[
+    {
+      "product":"66c5fb33eff4b4d63d7673e3"
+    }
+  ]
+}
+
+
+
+### Empty wishlist
+PUT {{BASEURI}}/store/wishlists HTTP/1.1
+Content-Type: application/json
+
+### Remove an item from wishlist
+PATCH {{BASEURI}}/store/wishlists/66c715f04e85af9597524c96 
+
+### Reading an item from wishist
+GET {{BASEURI}}/store/wishlists/66c715f04e85af9597524c96 HTTP/1.1
